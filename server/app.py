@@ -20,8 +20,15 @@ app.config["SECRET_KEY"] = os.getenv("SECRET")
 jwt = JWTManager(app)
 Session(app)
 
+ENV = 'prod'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
+if ENV == 'dev':
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
+    app.debug = True
+else:
+    app.debug = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
+
 db = SQLAlchemy(app)
 
 @app.route('/')
@@ -220,5 +227,5 @@ def reset():
     db.session.commit()
     return jsonify('Account Reset')
 
-
-app.run(debug=False)
+if __name__ == "__main__":
+    app.run()
