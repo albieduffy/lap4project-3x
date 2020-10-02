@@ -43,7 +43,7 @@ class Search extends React.Component {
 
                         <input required placeholder='TICKER' type='text' onChange={this.handleInput} maxLength="4"></input>
 
-                        <input type='submit' value='Search' />
+                        <input className='buttons' type='submit' value='Search' />
                     </form>
                 </div>
                 <div id='search-results'>
